@@ -10,6 +10,7 @@ session_start();
 // Inclure les contrôleurs
 require_once ROOT_PATH . 'controllers/AuthController.php';
 require_once ROOT_PATH . 'controllers/BookController.php';
+require_once ROOT_PATH . 'controllers/ProfileController.php';
 
 // Routing simple
 $action = $_GET['action'] ?? 'home';
@@ -17,6 +18,7 @@ $action = $_GET['action'] ?? 'home';
 // Instancier les contrôleurs
 $authController = new AuthController();
 $bookController = new BookController();
+$profileController = new ProfileController();
 
 // Router les requêtes
 switch($action) {
@@ -66,6 +68,20 @@ switch($action) {
         $bookController->toggleBookStatus();
         break;
     
+    // Routes des profils
+    case 'myProfile':
+        $profileController->myProfile();
+        break;
+    case 'editProfileForm':
+        $profileController->editProfileForm();
+        break;
+    case 'editProfile':
+        $profileController->editProfile();
+        break;
+    case 'viewProfile':
+        $profileController->viewProfile();
+        break;
+    
     // Page d'accueil (à développer)
     case 'home':
     default:
@@ -98,6 +114,7 @@ switch($action) {
                         
                         <div class="menu-section">
                             <h2>Mon compte</h2>
+                            <a href="index.php?action=myProfile" class="btn">Mon profil</a>
                             <a href="index.php?action=logout" class="btn">Déconnexion</a>
                         </div>
                     </div>
